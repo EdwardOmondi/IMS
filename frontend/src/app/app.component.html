@@ -1,0 +1,40 @@
+<p>{{ edit ? "Edit" : "Add" }} your item</p>
+<form [formGroup]="itemForm">
+  <label for="item-name">Item Name: </label>
+  <input id="item-name" type="text" formControlName="name" />
+
+  <label for="item-amount">Item Amount: </label>
+  <input id="item-amount" type="number" formControlName="amount" />
+</form>
+
+<button type="submit" (click)="onSubmit()" [disabled]="!itemForm.valid">
+  Submit
+</button>
+<table>
+  <!-- head -->
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Name</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let item of items; index as i">
+    <tr>
+      <td>{{ i + 1 }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.amount }}</td>
+      <button type="submit" (click)="editItem(i)" [disabled]="!itemForm.valid">
+        Edit
+      </button>
+      <button
+        type="submit"
+        (click)="deleteItem(i)"
+        [disabled]="!itemForm.valid"
+      >
+        Delete
+      </button>
+    </tr>
+  </tbody>
+</table>
+<router-outlet></router-outlet>
